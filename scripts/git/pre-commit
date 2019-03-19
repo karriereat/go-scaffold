@@ -1,0 +1,52 @@
+#!/bin/sh
+
+PRE_COMMIT="pre-commit:"
+NC=""
+PREFIX="$PRE_COMMIT"
+ERROR_PREFIX="$PRE_COMMIT"
+SUCCESS_PREFIX="$PRE_COMMIT"
+
+ERROR=false
+
+########################
+#### RUN PRE COMMIT ####
+########################
+
+#### LINT ####
+
+
+
+# if [ -t 1 ]; then
+#     composer lint -- --fail
+# else
+#     composer lint -- --fail --notty > /dev/null 2>&1
+# fi
+
+# if [ $? -ne 0 ]; then
+#     echo "$ERROR_PREFIX linting failed. Run 'composer lint' for more information."
+#     ERROR=true
+# fi
+
+# #### TEST ####
+
+# if [ -t 1 ]; then
+#     composer test -- --fail
+# else
+#     composer test -- --fail --notty > /dev/null 2>&1
+# fi
+
+# if [ $? -ne 0 ]; then
+#     echo "$ERROR_PREFIX testing failed. Run 'composer test' for more information."
+#     ERROR=true
+# fi
+
+###################
+####   EXIT    ####
+###################
+
+if [ "$ERROR" = true ]; then
+    echo "$ERROR_PREFIX Commit aborted."
+    exit 1
+fi
+
+exit $?
