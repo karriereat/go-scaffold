@@ -12,33 +12,37 @@ ERROR=false
 #### RUN PRE COMMIT ####
 ########################
 
+
+# #### FORMAT ####
+echo "running formatter..."
+make fmt > /dev/null 2>&1
+files=$(git diff --cached --name-only)
+if ! [ -z "$files" ]; then
+    git add $files
+fi
+
+if [ $? -ne 0 ]; then
+    echo "$ERROR_PREFIX formating failed."
+    ERROR=true
+fi
+
 #### LINT ####
+echo "running linter..."
+make lint > /dev/null 2>&1
 
-
-
-# if [ -t 1 ]; then
-#     composer lint -- --fail
-# else
-#     composer lint -- --fail --notty > /dev/null 2>&1
-# fi
-
-# if [ $? -ne 0 ]; then
-#     echo "$ERROR_PREFIX linting failed. Run 'composer lint' for more information."
-#     ERROR=true
-# fi
+if [ $? -ne 0 ]; then
+    echo "$ERROR_PREFIX linting failed. Run 'make lint' for more information."
+    ERROR=true
+fi
 
 # #### TEST ####
+echo "running tests..."
+make test > /dev/null 2>&1
 
-# if [ -t 1 ]; then
-#     composer test -- --fail
-# else
-#     composer test -- --fail --notty > /dev/null 2>&1
-# fi
-
-# if [ $? -ne 0 ]; then
-#     echo "$ERROR_PREFIX testing failed. Run 'composer test' for more information."
-#     ERROR=true
-# fi
+if [ $? -ne 0 ]; then
+    echo "$ERROR_PREFIX testing failed. Run 'make test' for more information."
+    ERROR=true
+fi
 
 ###################
 ####   EXIT    ####
