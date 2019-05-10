@@ -11,6 +11,7 @@ LINT_VERSION := 1.15.0
 export XC_OS
 export XC_ARCH
 export VERSION
+export PROJECT
 export GO111MODULE := on
 export LINT_VERSION
 export SOURCE_FILES
@@ -20,16 +21,17 @@ export TEST_OPTIONS
 .PHONY: all
 all: help
 
-
 .PHONY: help
 help:
 	@echo "make test - run go test"
 	@echo "make build - build $(PROJECT) for follwing OS-ARCH constilations: $(XC_OS) / $(XC_ARCH) "
 	@echo "make build-dev - build $(PROJECT) for OS-ARCH set by GOOS and GOARCH env variables"
+	@echo "make build-docker - build $(PROJECT) for linux-amd64 docker image"
 	@echo "make dist - build and create packages with hashsums"
 	@echo "make fmt - use gofmt & goimports"
 	@echo "make lint - run golangci-lint"
-
+	@echo "make docker - creates a docker image"
+	@echo "make docker-release/docker-release-latest - creates the docker image and pushes it to the registry (latest pushes also latest tag)"
 
 .PHONY: build
 build:
@@ -38,6 +40,10 @@ build:
 .PHONY: build-dev
 build-dev:
 	@scripts/build.sh dev
+
+.PHONY: build-docker
+build-docker:
+	@scripts/build.sh docker
 
 .PHONY: dist
 dist: 
@@ -59,6 +65,18 @@ test:
 coverage:
 	@scripts/test.sh coverage
 	
+.PHONY: docker
+docker: build-docker
+	@scripts/docker.sh
+
+.PHONY: docker-release
+docker-release:
+	@scripts/docker.sh release
+
+.PHONY: docker-release-latest
+docker-release-latest:
+	@scripts/docker.sh release latest
+
 .PHONY: setup
 setup:
 	@scripts/add-pre-commit.sh

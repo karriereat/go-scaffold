@@ -2,19 +2,19 @@
 set -e
 
 if [ ! -z $1 ]; then
-    VERSION=$1
-fi
-
-# Get the version from the command line
-if [ -z $VERSION ]; then
-    echo "Please specify a version."
-    exit 1
+    ACTION=$1
 fi
 
 # If its dev mode, only build for ourself
-if [ "$VERSION" == "dev" ]; then
+if [ "$ACTION" == "dev" ]; then
     XC_OS=$(go env GOOS)
     XC_ARCH=$(go env GOARCH)
+fi
+
+# If its docker mode, only build linux-amd64
+if [ "$ACTION" == "docker" ]; then
+    XC_OS=linux
+    XC_ARCH=amd64
 fi
 
 # Get the parent directory of where this script is.
@@ -51,4 +51,9 @@ if [ -d ./cmd ]; then
             done
         done
     done
+fi
+
+# If docker copy the binary to the root folder for dockerfile
+if [ "$ACTION" == "docker" ]; then
+    cp build/$XC_OS-$XC_ARCH/* ./
 fi

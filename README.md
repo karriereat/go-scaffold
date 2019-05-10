@@ -9,4 +9,4 @@ Scaffolding project for karriere.at GO apps
 
 ## Installation
 
-Be sure to replace all occurences of go-scaffold in Readme and Makefile
+Be sure to replace all occurences of go-scaffold in Readme/Makefile/Dockerfile
