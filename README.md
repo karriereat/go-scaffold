@@ -54,3 +54,7 @@ Change the `LICENSE` file or at least update the copyright information in its
 
 ## Contribution
 Feel free to create an PR with additional functionality but please create a issue in the first place to discuss if the change should be in this repo or in a fork
+
+## Used toolings
+- [golangci-lint](https://github.com/golangci/golangci-lint) - linter
+- [go-junit-report](https://github.com/jstemmer/go-junit-report) - junit converter for jenkins reports
