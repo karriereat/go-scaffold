@@ -46,7 +46,7 @@ if [ -d ./cmd ]; then
                 then
                     continue
                 fi
-                GOOS=$OS GOARCH=$ARCH go build -o build/$OS-$ARCH/${cmd##*/} ./cmd/${cmd##*/}
+                GOOS=$OS GOARCH=$ARCH go build -ldflags "$LD_FLAGS" -o build/$OS-$ARCH/${cmd##*/} ./cmd/${cmd##*/}
                 echo "- $OS-$ARCH finished"
             done
         done

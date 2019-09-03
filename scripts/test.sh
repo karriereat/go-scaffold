@@ -8,7 +8,7 @@ if [ -z $TEST_PATTERN ]; then
 fi
 
 if [ -z $1 ]; then
-    go test $TEST_OPTIONS -failfast -race $SOURCE_FILES -run $TEST_PATTERN -timeout=2m
+    go test $TEST_OPTIONS $SOURCE_FILES -run $TEST_PATTERN -timeout=$TEST_TIMEOUT
 else
-    go test $TEST_OPTIONS -failfast -race $SOURCE_FILES -run $TEST_PATTERN -timeout=2m 2>&1 | go-junit-report > report.xml
+    go test $TEST_OPTIONS $SOURCE_FILES -run $TEST_PATTERN -timeout=$TEST_TIMEOUT 2>&1 | go-junit-report > report.xml
 fi
