@@ -13,6 +13,9 @@ Be sure to replace all occurences of go-scaffold in:
 - Dockerfile
 - go.mod
 
+Update `VERSION` and `CHANGELOG.md` to match your settings
+Change the `LICENSE` file or at least update the copyright information in its
+
 ## Makefile commands
 - `make build` - build {PROJECT} with in makefile defined OS-ARCH constellations
 - `make build-dev` - build {PROJECT} for OS-ARCH set by GOOS and GOARCH env variables
@@ -41,10 +44,13 @@ Be sure to replace all occurences of go-scaffold in:
 ## Limitations
 - if you build for darwin the archs `386` and `arm` are omitted
 - if you build for windows the arch `arm` is omitted
+- building the docker container is currently only possible for linux-amd64
+- The docker-release functionality is currently in implementation
 
 ## ToDo
-- The docker-release functionality is currently in implementation
 - Configuration options for linter
+- Configuration for docker image building
+- travis-ci / circle-ci config files
 
 ## Contribution
 Feel free to create an PR with additional functionality but please create a issue in the first place to discuss if the change should be in this repo or in a fork
