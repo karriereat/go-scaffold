@@ -15,7 +15,7 @@ export VERSION
 export PROJECT
 export GO111MODULE := on
 export LD_FLAGS
-export SOURCE_FILESs
+export SOURCE_FILES
 export TEST_PATTERN
 export TEST_OPTIONS
 export TEST_TIMEOUT
